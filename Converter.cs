@@ -62,12 +62,19 @@ namespace CSharpAStToXml
         }
         public void Run(string ASourceDirectory)
         {
-            var Filenames = Directory.GetFiles(ASourceDirectory, "*.cs");
-            foreach (var Filename in Filenames)
-                Convert(Filename);
-
+            ConvertDirectory(ASourceDirectory);
             Console.WriteLine("Finished. Press Enter...");
             Console.ReadLine();
+        }
+        private void ConvertDirectory(string ADirectory)
+        {
+            var Directories = Directory.GetDirectories(ADirectory);
+            foreach (var Directory in Directories)
+                ConvertDirectory(Directory);
+
+            var Filenames = Directory.GetFiles(ADirectory, "*.cs");
+            foreach (var Filename in Filenames)
+                Convert(Filename);
         }
 
         private void Convert(string AFilename)
@@ -79,7 +86,7 @@ namespace CSharpAStToXml
 
             AFilename = Path.ChangeExtension(AFilename, ".astml");
             var Writer = new XmlTextWriter(AFilename, Encoding.Default);
-            Writer.Formatting = Formatting.Indented;
+            //Writer.Formatting = Formatting.Indented;
             WriteNode(CompilationUnit, Writer);
             Writer.Flush();
         }

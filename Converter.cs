@@ -50,7 +50,7 @@ namespace CSharpAStToXml
             GTokenBlackList.Add("HasTrailingTrivia");
             GTokenBlackList.Add("ContainsAnnotations");
             GTokenBlackList.Add("Value");
-            GTokenBlackList.Add("Text");
+            //GTokenBlackList.Add("Text");
 
             GTriviaBlackList.Add("Language");
             GTriviaBlackList.Add("FullSpan");
